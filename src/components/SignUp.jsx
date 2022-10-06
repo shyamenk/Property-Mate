@@ -25,7 +25,7 @@ const SignUp = ({signUpHandler, inputChangeHandler, name, email, password}) => {
             type="text"
             className="nameInput"
             placeholder="Name"
-            id="name"
+            name="name"
             value={name}
             onChange={inputChangeHandler}
           />
@@ -33,7 +33,7 @@ const SignUp = ({signUpHandler, inputChangeHandler, name, email, password}) => {
             type="email"
             className="emailInput"
             placeholder="Email"
-            id="email"
+            name="email"
             value={email}
             onChange={inputChangeHandler}
           />
@@ -41,7 +41,7 @@ const SignUp = ({signUpHandler, inputChangeHandler, name, email, password}) => {
             type="password"
             className="passwordInput "
             placeholder="Password"
-            id="password"
+            name="password"
             value={password}
             onChange={inputChangeHandler}
           />
