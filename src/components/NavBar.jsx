@@ -1,13 +1,19 @@
-import './NavBar.css'
 import {useNavigate, useLocation} from 'react-router-dom'
 import {ReactComponent as OfferIcon} from '../assets/svg/localOfferIcon.svg'
 import {ReactComponent as ExploreIcon} from '../assets/svg/exploreIcon.svg'
 import {ReactComponent as PersonOutlineIcon} from '../assets/svg/personOutlineIcon.svg'
-// import logo from '../assets/svg/googleIcon.svg'
+import {ReactComponent as LogoutIcon} from '../assets/svg/log-out.svg'
+
 import logo from '../assets/PropertyMate-logos_white.png'
+import './NavBar.css'
+
+import useAuth from '../store/AuthContext'
 
 const NavBar = () => {
+  const {user, signOutHandler} = useAuth()
+
   const navigate = useNavigate()
+
   const location = useLocation()
 
   const routePath = route => {
@@ -46,13 +52,25 @@ const NavBar = () => {
             </li>
             <li className="navbarListItem">
               <PersonOutlineIcon
-                fill={routePath('/sign-in') ? '#14adc6' : '#546981'}
+                fill={routePath('/profile') ? '#14adc6' : '#546981'}
                 width="36px"
                 height="36px"
-                onClick={() => navigate('/sign-in')}
+                onClick={() => navigate('/profile')}
               />
-              <p className="title" onClick={() => navigate('/sign-in')}>
+              <p className="title" onClick={() => navigate('/profile')}>
                 Profile
+              </p>
+            </li>
+
+            <li className="navbarListItem">
+              <LogoutIcon
+                fill={routePath('/logout') ? '#14adc6' : '#546981'}
+                width="36px"
+                height="36px"
+                onClick={() => signOutHandler(navigate)}
+              />
+              <p className="title" onClick={() => signOutHandler(navigate)}>
+                {user === 'Guest' ? 'Sign Up' : 'Sign Out'}
               </p>
             </li>
           </ul>

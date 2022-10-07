@@ -3,7 +3,7 @@
   width: 100%;
   background-color: #1a2d45;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
@@ -17,7 +17,7 @@
 .navbarListItems {
   display: flex;
   justify-content: flex-end;
-  column-gap: 60px;
+  column-gap: 40px;
   align-items: center;
   list-style: none;
   margin-right: 30px;
@@ -48,6 +48,18 @@
   flex-direction: column;
   align-items: center;
   font-size: 14px;
+}
+.customButton {
+  border-radius: 20px;
+  border: 1px solid #14adc6;
+  background-color: #14adc6;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
 }
 
 /* .navbarListItemName,

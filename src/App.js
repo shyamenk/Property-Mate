@@ -5,12 +5,11 @@ import Profile from './pages/Profile'
 import Authentication from './pages/Authentication.jsx'
 import ForgotPassword from './pages/ForgotPassword'
 import NavBar from './components/NavBar'
-import {AuthContextProvider} from './store/AuthContext'
-
+import {AuthProvider} from './store/AuthContext'
 const App = () => {
   return (
     <>
-      <AuthContextProvider>
+      <AuthProvider>
         <Router>
           <NavBar />
           <Routes>
@@ -21,7 +20,7 @@ const App = () => {
             <Route path="/forgot-password" element={<ForgotPassword />} />
           </Routes>
         </Router>
-      </AuthContextProvider>
+      </AuthProvider>
     </>
   )
 }

@@ -1,11 +1,7 @@
 import React from 'react'
-import Loader from '../components/Loader'
+
 const Explore = () => {
-  return (
-    <>
-      <Loader />
-    </>
-  )
+  return <h1>Exolore</h1>
 }
 
 export default Explore

@@ -1,9 +1,16 @@
 import {Link} from 'react-router-dom'
+
 import {AiFillFacebook} from 'react-icons/ai'
 import {AiFillGoogleCircle} from 'react-icons/ai'
 import {AiOutlineGithub} from 'react-icons/ai'
 
-const SignIn = ({signInHandler, email, inputChangeHandler, password}) => {
+const SignIn = ({
+  signInHandler,
+  email,
+  inputChangeHandler,
+  password,
+  error,
+}) => {
   return (
     <>
       <div className="form-container sign-in-container">
@@ -29,6 +36,7 @@ const SignIn = ({signInHandler, email, inputChangeHandler, password}) => {
             value={email}
             onChange={inputChangeHandler}
           />
+          {error && <p className="text-error">{error}</p>}
           <input
             type="password"
             className="passwordInput"
@@ -38,7 +46,7 @@ const SignIn = ({signInHandler, email, inputChangeHandler, password}) => {
             onChange={inputChangeHandler}
           />
           <Link to="/forgot-password">Forgot your password?</Link>
-          <button>Sign In</button>
+          <button>Login</button>
         </form>
       </div>
     </>

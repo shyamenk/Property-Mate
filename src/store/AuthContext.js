@@ -5,36 +5,23 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
+  signInWithEmailAndPassword,
 } from 'firebase/auth'
 
 import {setDoc, doc, serverTimestamp} from 'firebase/firestore'
 
-const AuthContext = React.createContext({
-  onSignUp: (name, email, password) => {},
-  onSignIn: (email, password) => {},
-  onSignOut: () => {},
-  isLoggedIn: false,
-  loading: false,
-  error: '',
-  user: '',
-})
+const AuthContext = React.createContext()
 
-export const AuthContextProvider = ({children}) => {
-  const auth = getAuth()
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [user, setUser] = useState('')
+export const AuthProvider = ({children}) => {
+  const [user, setUser] = useState('Guest')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  setLoading(true)
-  setUser('Shyam')
-  setError(null)
-  setIsLoggedIn(false)
-  // User SignUp and save to firebase Store Database
+  const auth = getAuth()
+
   const signUpHandler = async (formData, settoogle) => {
     const {name, email, password} = formData
-
+    setLoading(true)
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -53,23 +40,35 @@ export const AuthContextProvider = ({children}) => {
       formDataClone.timestamp = serverTimestamp()
 
       await setDoc(doc(db, 'users', user.uid), formDataClone)
-
+      setLoading(false)
       settoogle(prev => !prev)
-
-      console.log(user)
     } catch (error) {
-      console.log(error)
+      console.log(error.message)
     }
   }
 
-  // User Sign In Handler
-  const signInHandler = (email, password) => {
-    console.log('Sign In Handler')
+  const signInHandler = async (email, password, navigate) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      )
+      if (userCredential.user) {
+        setUser(userCredential.user.displayName)
+        navigate('/profile')
+      }
+    } catch (error) {
+      setError(error.message)
+      console.log(error.message)
+      navigate('/sign-in')
+    }
   }
 
-  // User Logout Handler
-  const signOutHandler = () => {
-    console.log('Sign Out')
+  const signOutHandler = navigate => {
+    auth.signOut()
+    setUser('Guest')
+    navigate('sign-in')
   }
 
   const memoedValue = useMemo(
@@ -80,15 +79,20 @@ export const AuthContextProvider = ({children}) => {
       signUpHandler,
       signInHandler,
       signOutHandler,
-      isLoggedIn,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user, loading, isLoggedIn, error],
+    [user, loading],
   )
+
   return (
-    <AuthContext.Provider value={memoedValue}>{children}</AuthContext.Provider>
+    <>
+      <AuthContext.Provider value={memoedValue}>
+        {children}
+      </AuthContext.Provider>
+    </>
   )
 }
+
 export default function useAuth() {
   return useContext(AuthContext)
 }

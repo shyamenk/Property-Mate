@@ -3,7 +3,14 @@ import {AiFillFacebook} from 'react-icons/ai'
 import {AiFillGoogleCircle} from 'react-icons/ai'
 import {AiOutlineGithub} from 'react-icons/ai'
 
-const SignUp = ({signUpHandler, inputChangeHandler, name, email, password}) => {
+const SignUp = ({
+  signUpHandler,
+  inputChangeHandler,
+  name,
+  email,
+  password,
+  loading,
+}) => {
   return (
     <>
       <div className="form-container sign-up-container">
