@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useMemo, useState} from 'react'
+import {createContext, useContext, useEffect, useState} from 'react'
 import {toast} from 'react-toastify'
 import {
   createUserWithEmailAndPassword,
@@ -18,7 +18,9 @@ export const UserAuthContextProvider = ({children}) => {
 
   const [error, setError] = useState('')
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  const [isloggedIn, setIsLoggedIn] = useState(false)
 
   const signUp = async (formData, settoogle) => {
     const {name, email, password} = formData
@@ -33,7 +35,7 @@ export const UserAuthContextProvider = ({children}) => {
       )
       const user = userCredentials.user
       toast.success('Thanks for signing Up, Please Login to continue')
-      updateProfile(auth.currentUser, {
+      await updateProfile(auth.currentUser, {
         displayName: name,
       })
 
@@ -44,7 +46,6 @@ export const UserAuthContextProvider = ({children}) => {
       }
 
       await setDoc(doc(db, 'users', user.uid), fireStoreData)
-      setLoading(false)
       settoogle(prev => !prev)
     } catch (error) {
       toast.error(error.message)
@@ -66,8 +67,9 @@ export const UserAuthContextProvider = ({children}) => {
   }
 
   const logOut = async navigate => {
-    if (user !== 'Guest') {
+    if (isloggedIn) {
       await auth.signOut()
+      setIsLoggedIn(false)
       toast.info('You have been logged out successfully.')
       navigate('/sign-in')
     } else {
@@ -76,35 +78,30 @@ export const UserAuthContextProvider = ({children}) => {
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentuser => {
-      // console.log('Auth', currentuser)
-      if (currentuser) {
-        setUser(currentuser)
-      } else {
-        setUser('Guest')
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      if (user) {
+        setUser(user)
+        setIsLoggedIn(true)
       }
+      setLoading(false)
     })
 
     return () => {
       unsubscribe()
     }
-  }, [user])
+  }, [isloggedIn])
 
-  const memoedValue = useMemo(
-    () => ({
-      user,
-      loading,
-      error,
-      signUp,
-      signIn,
-      logOut,
-    }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user, loading, error],
-  )
-
+  const contextValue = {
+    user,
+    loading,
+    error,
+    signUp,
+    signIn,
+    logOut,
+    isloggedIn,
+  }
   return (
-    <UserAuthContext.Provider value={memoedValue}>
+    <UserAuthContext.Provider value={contextValue}>
       {children}
     </UserAuthContext.Provider>
   )

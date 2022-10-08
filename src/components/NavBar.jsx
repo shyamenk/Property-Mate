@@ -10,7 +10,7 @@ import './NavBar.css'
 import {useUserAuth} from '../store/AuthContext'
 
 const NavBar = () => {
-  const {user, logOut} = useUserAuth()
+  const {logOut, isloggedIn} = useUserAuth()
 
   const navigate = useNavigate()
 
@@ -71,7 +71,7 @@ const NavBar = () => {
                 onClick={() => logOut(navigate)}
               />
               <p className="title" onClick={() => logOut(navigate)}>
-                {user !== 'Guest' ? 'SignOut' : 'SignIn'}
+                {isloggedIn ? 'SignOut' : 'SignIn'}
               </p>
             </li>
           </ul>
