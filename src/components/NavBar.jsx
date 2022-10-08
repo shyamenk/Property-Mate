@@ -7,10 +7,10 @@ import {ReactComponent as LogoutIcon} from '../assets/svg/log-out.svg'
 import logo from '../assets/PropertyMate-logos_white.png'
 import './NavBar.css'
 
-import useAuth from '../store/AuthContext'
+import {useUserAuth} from '../store/AuthContext'
 
 const NavBar = () => {
-  const {user, signOutHandler} = useAuth()
+  const {user, logOut} = useUserAuth()
 
   const navigate = useNavigate()
 
@@ -21,6 +21,7 @@ const NavBar = () => {
       return true
     }
   }
+
   return (
     <>
       <div className="navbar">
@@ -67,10 +68,10 @@ const NavBar = () => {
                 fill={routePath('/logout') ? '#14adc6' : '#546981'}
                 width="36px"
                 height="36px"
-                onClick={() => signOutHandler(navigate)}
+                onClick={() => logOut(navigate)}
               />
-              <p className="title" onClick={() => signOutHandler(navigate)}>
-                {user === 'Guest' ? 'Sign Up' : 'Sign Out'}
+              <p className="title" onClick={() => logOut(navigate)}>
+                {user !== 'Guest' ? 'SignOut' : 'SignIn'}
               </p>
             </li>
           </ul>

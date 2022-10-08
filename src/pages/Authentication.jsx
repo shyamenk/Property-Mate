@@ -6,7 +6,7 @@ import SignIn from '../components/SignIn'
 import Overlay from '../components/Overlay'
 import './Authentication.css'
 
-import useAuth from '../store/AuthContext.js'
+import {useUserAuth} from '../store/AuthContext'
 
 const Authentication = () => {
   const initialData = {
@@ -23,7 +23,8 @@ const Authentication = () => {
 
   const {name, email, password} = formData
 
-  const {error, signUpHandler, signInHandler} = useAuth()
+  const {error, signUp, signIn} = useUserAuth()
+
   const ghostButtonHandler = () => {
     settoogle(prev => !prev)
     setformData(initialData)
@@ -36,14 +37,14 @@ const Authentication = () => {
     }))
   }
 
-  const signInSubmitHandler = event => {
-    event.preventDefault()
-    signInHandler(email, password, navigate)
-  }
-
   const signUpSubmitHandler = event => {
     event.preventDefault()
-    signUpHandler(formData, settoogle, setformData)
+    signUp(formData, settoogle, setformData)
+  }
+
+  const signInSubmitHandler = event => {
+    event.preventDefault()
+    signIn(email, password, navigate)
   }
 
   return (

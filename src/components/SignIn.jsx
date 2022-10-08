@@ -36,7 +36,7 @@ const SignIn = ({
             value={email}
             onChange={inputChangeHandler}
           />
-          {error && <p className="text-error">{error}</p>}
+
           <input
             type="password"
             className="passwordInput"
