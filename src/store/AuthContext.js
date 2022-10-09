@@ -86,7 +86,6 @@ export const UserAuthContextProvider = ({children}) => {
       }
       setLoading(false)
     })
-    console.log(unsubscribe)
     return () => {
       unsubscribe()
     }
