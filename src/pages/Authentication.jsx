@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom'
 import SignUp from '../components/SignUp'
 import SignIn from '../components/SignIn'
 import Overlay from '../components/Overlay'
+
 import './Authentication.css'
 
 import {useUserAuth} from '../store/AuthContext'

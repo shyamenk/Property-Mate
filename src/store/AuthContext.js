@@ -24,9 +24,7 @@ export const UserAuthContextProvider = ({children}) => {
 
   const signUp = async (formData, settoogle) => {
     const {name, email, password} = formData
-
     setLoading(true)
-
     try {
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
@@ -49,21 +47,24 @@ export const UserAuthContextProvider = ({children}) => {
       settoogle(prev => !prev)
     } catch (error) {
       toast.error(error.message)
-      // console.log(error.message)
+      setLoading(false)
       setError(error.message)
     }
+    setLoading(false)
   }
 
   const signIn = async (email, password, navigate) => {
+    setLoading(true)
     try {
       await signInWithEmailAndPassword(auth, email, password)
       toast.success('Login Successfull!')
       navigate('/profile')
     } catch (error) {
-      toast.error(error.message)
+      toast.error('Invalid username/password')
       navigate('/sign-in')
       // setError(error.message)
     }
+    setLoading(false)
   }
 
   const logOut = async navigate => {
@@ -85,7 +86,7 @@ export const UserAuthContextProvider = ({children}) => {
       }
       setLoading(false)
     })
-
+    console.log(unsubscribe)
     return () => {
       unsubscribe()
     }

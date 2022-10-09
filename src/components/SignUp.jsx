@@ -2,20 +2,17 @@ import {Link} from 'react-router-dom'
 import {AiFillFacebook} from 'react-icons/ai'
 import {AiFillGoogleCircle} from 'react-icons/ai'
 import {AiOutlineGithub} from 'react-icons/ai'
+import {useUserAuth} from '../store/AuthContext'
+import Spinner from './Spinner'
 
-const SignUp = ({
-  signUpHandler,
-  inputChangeHandler,
-  name,
-  email,
-  password,
-  loading,
-}) => {
+const SignUp = ({signUpHandler, inputChangeHandler, name, email, password}) => {
+  const {loading} = useUserAuth()
   return (
     <>
       <div className="form-container sign-up-container">
         <form autoComplete="off" onSubmit={signUpHandler}>
           <h1>Create Account</h1>
+          {loading && <Spinner />}
           <div className="social-container">
             <Link to="https://www.google.com" className="social">
               <AiFillFacebook />
