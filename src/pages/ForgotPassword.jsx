@@ -1,24 +1,29 @@
-import './ForgotPassword.css'
 import forgotImage from '../assets/forgotpassword.png'
-import {sendPasswordResetEmail, getAuth} from 'firebase/auth'
-// import {auth} from '../firebase.config.js'
+import {sendPasswordResetEmail} from 'firebase/auth'
+import {auth} from '../firebase.config.js'
 import {useState} from 'react'
 import {toast} from 'react-toastify'
+import './ForgotPassword.css'
+import {useNavigate} from 'react-router-dom'
 
 const ForgotPassword = () => {
+  const navigate = useNavigate()
+
   const [email, setemail] = useState('')
 
   const submitHandler = async e => {
     e.preventDefault()
 
     try {
-      const auth = getAuth()
-
       await sendPasswordResetEmail(auth, email)
-      toast.success('Success ')
+      toast.success(
+        'Password reset email send succesfully,check your email and login to continue.',
+      )
+      navigate('/sign-in')
     } catch (error) {
       console.log(error)
-      toast.error('Could Not send the link')
+      toast.error('Please check your email address')
+      navigate('/sign-in')
     }
   }
 

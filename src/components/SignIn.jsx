@@ -1,10 +1,19 @@
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
-import {AiFillFacebook} from 'react-icons/ai'
-import {AiFillGoogleCircle} from 'react-icons/ai'
-import {AiOutlineGithub} from 'react-icons/ai'
+// import {AiFillFacebook} from 'react-icons/ai'
+// import {AiFillGoogleCircle} from 'react-icons/ai'
+// import {AiOutlineGithub} from 'react-icons/ai'
+import {ReactComponent as GoogleIcon} from '../assets/svg/google-icon.svg'
+import {ReactComponent as FacebookIcon} from '../assets/svg/facebookIcon.svg'
+
+import {ReactComponent as GithubIcon} from '../assets/svg/github-icon.svg'
+
 import {useUserAuth} from '../store/AuthContext'
 import Spinner from './Spinner'
+import {toast} from 'react-toastify'
+import {auth, db} from '../firebase.config.js'
+import {doc, setDoc, getDoc, serverTimestamp} from 'firebase/firestore'
+import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
 
 const SignIn = ({
   signInHandler,
@@ -14,6 +23,34 @@ const SignIn = ({
   error,
 }) => {
   const {loading} = useUserAuth()
+  const navigate = useNavigate()
+
+  const onGoogleAuthHandler = async () => {
+    try {
+      const provider = new GoogleAuthProvider()
+      const result = await signInWithPopup(auth, provider)
+      const user = result.user
+      // Check for User
+      const docRef = doc(db, 'users', user.uid)
+      const docSnap = await getDoc(docRef)
+      console.log({docRef})
+      console.log({docSnap})
+
+      if (!docSnap.exists()) {
+        await setDoc(doc(db, 'users', user.uid), {
+          name: user.displayName,
+          email: user.email,
+          timestamp: serverTimestamp(),
+        })
+      } else {
+        toast.info('User Already in our Database')
+      }
+      navigate('/')
+    } catch (error) {
+      toast.error(error.message)
+      navigate('/sign-in')
+    }
+  }
 
   return (
     <>
@@ -22,14 +59,14 @@ const SignIn = ({
           <h1>Sign in</h1>
           {loading && <Spinner />}
           <div className="social-container">
-            <Link to="www.google.com" className="social">
-              <AiFillFacebook />
+            <Link className="social">
+              <FacebookIcon />
             </Link>
-            <Link to="www.google.com" className="social">
-              <AiFillGoogleCircle />
+            <Link className="social">
+              <GoogleIcon onClick={onGoogleAuthHandler} />
             </Link>
-            <Link to="www.google.com" className="social">
-              <AiOutlineGithub />
+            <Link className="social">
+              <GithubIcon />
             </Link>
           </div>
           <span>or use your account</span>

@@ -54,6 +54,7 @@ export const UserAuthContextProvider = ({children}) => {
   }
 
   const signIn = async (email, password, navigate) => {
+    console.log('sIGN iN Context')
     setLoading(true)
     try {
       await signInWithEmailAndPassword(auth, email, password)

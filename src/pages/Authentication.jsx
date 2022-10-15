@@ -46,6 +46,7 @@ const Authentication = () => {
   const signInSubmitHandler = event => {
     event.preventDefault()
     signIn(email, password, navigate)
+    console.log('Sign In')
   }
 
   return (
