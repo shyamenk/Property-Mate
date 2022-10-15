@@ -62,21 +62,12 @@
   transition: transform 80ms ease-in;
 }
 
-/* .navbarListItemName,
-.navbarListItemNameActive {
-  margin-top: 0.25rem;
-  font-size: 14px;
-  font-weight: 600;
-  color: #8f8f8f;
-}
-.navbarListItemNameActive {
-  color: #cedee1;
-} */
 .title {
   color: #dcf4f4;
   margin: 0px;
   font-weight: 300;
 }
+
 @media only screen and (max-width: 600px) {
   .navbarListItems {
     column-gap: 25px;
