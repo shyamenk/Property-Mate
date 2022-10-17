@@ -1,8 +1,8 @@
 import {FaBath, FaBed} from 'react-icons/fa'
-import {AiTwotoneDelete} from 'react-icons/ai'
+import {AiFillDelete} from 'react-icons/ai'
 import {MdSystemUpdateAlt} from 'react-icons/md'
 import {GrEdit} from 'react-icons/gr'
-
+import ReactTooltip from 'react-tooltip'
 import './ListingItems.css'
 
 const ListingItems = ({listing, id}) => {
@@ -12,9 +12,9 @@ const ListingItems = ({listing, id}) => {
         <div className="listing__images">
           <img src={listing.imgUrls} alt={listing.name} />
           <div className="listing__icons">
-            <GrEdit />
-            <MdSystemUpdateAlt />
-            <AiTwotoneDelete style={{width: '20px', height: '20px'}} />
+            <GrEdit onClick={() => console.log('Clicked')} data-tip="Edit" />
+            <MdSystemUpdateAlt data-tip="Update" />
+            <AiFillDelete data-tip="Delete" />
           </div>
         </div>
         <div className="listing__details">
@@ -47,6 +47,7 @@ const ListingItems = ({listing, id}) => {
           </p>
         </div>
       </div>
+      <ReactTooltip />
     </div>
   )
 }
