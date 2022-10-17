@@ -25,8 +25,8 @@
 .logo {
   display: flex;
   align-items: center;
-  font-family: 'Poppins', sans-serif;
-  font-family: 'Merienda One', cursive;
+  font-family: 'Podkova', sans-serif;
+  /* font-family: 'Merienda One', cursive; */
   color: #14adc6;
   margin: 20px;
 }

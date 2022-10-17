@@ -1,57 +1,87 @@
-.explore-section {
-  margin: 1rem;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Noto+Sans+Warang+Citi&family=PT+Serif+Caption&display=swap');
+:root {
+  --ff-accent: 'Podkova', serif;
+  --shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+  /* font-family: ' Bebas Neue', sans-serif; */
+  /* font-family: 'Cinzel', serif; */
+  /* font-family: 'Noto Sans Warang Citi', sans-serif; */
+  /* font-family: 'PT Serif Caption', serif; */
 }
 
-.explore-header {
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-.exploreHeading,
-.explore-category-heading {
-  font-weight: 700;
-}
-
-.explore-category-heading {
-  margin-top: 3rem;
-}
-
-.explore-categories {
-  display: flex;
-  justify-content: space-between;
-}
-.explore-categories a {
-  width: 48%;
-}
-
-.explore-category-image {
-  min-height: 115px;
-  height: 15vw;
+.explore__section {
   width: 100%;
-  border-radius: 1.5rem;
+  height: 130vh;
+  background-repeat: no-repeat, repeat;
+  background: #222831;
   object-fit: cover;
-  margin: 0 auto;
 }
 
-.explore-category-name {
-  font-weight: 800;
-  font-size: 1.6rem;
+.header__title {
+  font-family: 'Cinzel', serif;
+  padding-top: 2rem;
+  color: #01baef;
+  font-size: 3.5rem;
+  text-align: center;
+}
+
+.header__title span {
+  color: white;
+  font-size: 3rem;
+  font-family: var(--ff-accent);
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  margin: 2em 0;
+
+  gap: 2rem;
+}
+
+.category {
+  width: 20rem;
+  padding: 2em;
+  border-radius: 1em;
+  margin: 0 0.5em;
+  background: #334756;
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+.category img {
+  width: 100%;
+  border-radius: var(--border-radius);
+  transition: transform 0.2s;
+}
+
+.category img:hover {
+  transform: scale(1.1);
+}
+
+.category__title {
+  font-family: 'Podkova', serif;
+  text-transform: uppercase;
   text-align: left;
+  color: white;
 }
 
-/* Media queries */
-@media (min-width: 1024px) {
-  .explore {
-    margin: 3rem;
-  }
+.category__desc {
+  margin: 0 0 1em;
+  text-align: left;
+  line-height: 1.5rem;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 300;
 }
-@media (min-width: 1217px) {
-  .explore {
-    margin-bottom: 10rem;
-  }
-}
-@media (max-height: 536) {
-  .explore {
-    margin-bottom: 10rem;
-  }
+
+.category__btn {
+  all: unset;
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.5em 0.8em;
+  border-radius: 0.25em;
+  font-size: medium;
+  text-transform: uppercase;
+  background: #01baef;
+  color: black;
 }

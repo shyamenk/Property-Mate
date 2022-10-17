@@ -1,37 +1,48 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+
 import rentCategoryImage from '../assets/jpg/rentCategoryImage.jpg'
 import sellCategoryImage from '../assets/jpg/sellCategoryImage.jpg'
 import './Explore.css'
 const Explore = () => {
   return (
     <>
-      <div className="explore-section">
+      <div className="explore__section">
         <header>
-          <p className="explore-header">EXPLORE</p>
+          <h1 className="header__title">
+            Its a Big World out There,
+            <br />
+            <span>Go eXPLORE</span>
+          </h1>
         </header>
-        <main>
-          {/* {Slider} */}
-          <p className="explore-category-heading">Categories</p>
-          <div className="explore-categories">
+        <div className="categories">
+          <div className="category">
+            <img src={rentCategoryImage} alt="rent" />
+            <h2 className="category__title ">Rent a house</h2>
+            <p className="category__desc">
+              Here is an excellent Independent House available for rent Please
+              explore the rent property Fully Furnished.Real estate agents have
+              resources available to them the public does not, such as current
+              market data.
+            </p>
             <Link to="/category/rent">
-              <img
-                src={rentCategoryImage}
-                alt="rent"
-                className="explore-category-image"
-              />
-              <p className="explore-category-name">Places for Rent</p>
-            </Link>
-            <Link to="/category/sell">
-              <img
-                src={sellCategoryImage}
-                alt="rent"
-                className="explore-category-image "
-              />
-              <p className="explore-category-name">Places for Sell</p>
+              <button className="category__btn">Rent</button>
             </Link>
           </div>
-        </main>
+          <div className="category">
+            <img src={sellCategoryImage} alt="rent" />
+            <h2 className="category__title ">Sell a house</h2>
+            <p className="category__desc">
+              Here is an excellent Independent House available for rent Please
+              explore the rent property Fully Furnished.Real estate agents have
+              resources available to them the public does not, such as current
+              market data.
+            </p>
+            <Link to="/category/sell">
+              <button className="category__btn">Sell</button>
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   )

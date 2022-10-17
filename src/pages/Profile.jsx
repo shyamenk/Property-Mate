@@ -8,7 +8,7 @@ const Profile = () => {
 
   return (
     <>
-      <h1>{user.displayName}</h1>
+      <h1 className="header__title">{user.displayName}</h1>
     </>
   )
 }

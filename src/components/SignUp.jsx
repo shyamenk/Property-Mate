@@ -17,6 +17,7 @@ const SignUp = ({signUpHandler, inputChangeHandler, name, email, password}) => {
             placeholder="Name"
             name="name"
             value={name}
+            required
             onChange={inputChangeHandler}
           />
           <input
@@ -25,6 +26,7 @@ const SignUp = ({signUpHandler, inputChangeHandler, name, email, password}) => {
             placeholder="Email"
             name="email"
             value={email}
+            required
             onChange={inputChangeHandler}
           />
           <input
@@ -33,6 +35,7 @@ const SignUp = ({signUpHandler, inputChangeHandler, name, email, password}) => {
             placeholder="Password"
             name="password"
             value={password}
+            required
             onChange={inputChangeHandler}
           />
           <button>Sign Up</button>

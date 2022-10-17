@@ -1,6 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merienda+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+:root {
+  --clr-primary-100: #01baef;
+  --clr-primary-200: #0b4f6c;
+
+  --clr-secondary-100: #f52c29;
+  --clr-dark-100: #040f16;
+
+  --clr-light-100: #fbfbff;
+  --clr-neutral-400: #4e4e4e;
+
+  --fs-300: 0.75rem;
+  --fs-400: 1rem;
+  --fs-500: 2rem;
+
+  --fw-400: 400;
+  --fw-700: 700;
+
+  --ff-accent: 'Podkova', serif;
+  --ff-base: 'Poppins', sans-serif;
+
+  --shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+  --border-radius: 0.75rem;
+}
 
 html::-webkit-scrollbar {
   display: none;
@@ -11,19 +34,20 @@ h2 {
 body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
+  background: #222831;
 }
 
 a {
   text-decoration: none;
   display: block;
-  color: #000000;
+  color: var(--clr-dark-100);
 }
 
-button {
+/* button {
   outline: none;
   border: none;
-}
+} */
 
 .input,
 .passwordInput,
@@ -32,13 +56,14 @@ button {
 .signInEmailInput,
 .nameInput,
 .textarea {
-  box-shadow: rgba(0, 0, 0, 0.11);
+  /* box-shadow: rgba(0, 0, 0, 0.11); */
+  box-shadow: var(--shadow);
   border: none;
-  background: #2b485c;
-  border-radius: 2rem;
+  background: var(--clr-primary-200);
+  border-radius: var(--border-radius);
   height: 2.5rem;
   width: 100%;
-  outline: #000000;
+  outline: var(--clr-dark-100);
   font-family: 'Montserrat', sans-serif;
   padding: 0 3rem;
   font-size: 1rem;
@@ -62,10 +87,10 @@ button {
 
 .primaryButton {
   cursor: pointer;
-  background: #00cc66;
-  border-radius: 1rem;
+  background-position-x: var(--clr-primary-100);
+  border-radius: var(--border-radius);
   padding: 0.85rem 2rem;
-  color: #ffffff;
+  color: var(--clr-light-100);
   font-weight: 600;
   font-size: 1.25rem;
   width: 80%;
