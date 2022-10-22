@@ -14,6 +14,7 @@ import {toast} from 'react-toastify'
 import {auth, db} from '../firebase.config.js'
 import {doc, setDoc, getDoc, serverTimestamp} from 'firebase/firestore'
 import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
+import {Input, TextField} from '@mui/material'
 
 const SignIn = ({
   signInHandler,
@@ -70,25 +71,29 @@ const SignIn = ({
             </Link>
           </div>
           <span>or use your account</span>
-          <input
+          <TextField
+            size="small"
+            required
             type="email"
-            className="emailInput"
-            placeholder="Email"
+            id="outlined-required"
+            label="Email"
+            sx={{mt: 2}}
             name="email"
             value={email}
             onChange={inputChangeHandler}
-            required
           />
-
-          <input
+          <TextField
+            size="small"
+            required
             type="password"
-            className="passwordInput"
-            placeholder="Password"
+            id="outlined-required"
+            label="Password"
+            sx={{mt: 2}}
             name="password"
             value={password}
             onChange={inputChangeHandler}
-            required
           />
+
           <Link to="/forgot-password">Forgot your password?</Link>
           <button>Login</button>
         </form>

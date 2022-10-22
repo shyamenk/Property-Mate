@@ -61,23 +61,29 @@ const Category = () => {
 
   return (
     <div className="category__wrapper">
-      {loading && <Spinner />}
       <header>
         <h1 className="header__title">
           {params.categoryName === 'rent'
             ? 'Places for Rent'
             : 'Places for Sale'}
         </h1>
-        <ul className="categoryListings">
-          {listings &&
-            listings.map(listing => (
-              <ListingItems
-                listing={listing.data}
-                id={listing.id}
-                key={listing.id}
-              />
-            ))}
-        </ul>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <ul className="categoryListings">
+            {listings && listings.length > 0 ? (
+              listings.map(listing => (
+                <ListingItems
+                  listing={listing.data}
+                  id={listing.id}
+                  key={listing.id}
+                />
+              ))
+            ) : (
+              <p className="header__title">No Items To Show </p>
+            )}
+          </ul>
+        )}
       </header>
     </div>
   )

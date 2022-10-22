@@ -48,7 +48,12 @@ a {
   outline: none;
   border: none;
 } */
-
+.userDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
 .input,
 .passwordInput,
 .emailInput,

@@ -1,3 +1,4 @@
+import {TextField} from '@mui/material'
 import {useUserAuth} from '../store/AuthContext'
 import Spinner from './Spinner'
 
@@ -11,31 +12,40 @@ const SignUp = ({signUpHandler, inputChangeHandler, name, email, password}) => {
           {loading && <Spinner />}
 
           <span>or use your email for registration</span>
-          <input
-            type="text"
-            className="nameInput"
-            placeholder="Name"
+
+          <TextField
+            size="small"
+            required
+            type="name"
+            id="outlined-required"
+            label="Name"
+            sx={{mt: 2}}
             name="name"
             value={name}
-            required
             onChange={inputChangeHandler}
           />
-          <input
+
+          <TextField
+            autoComplete="false"
+            size="small"
+            required
             type="email"
-            className="emailInput"
-            placeholder="Email"
+            id="outlined-required"
+            label="Email"
+            sx={{mt: 2}}
             name="email"
             value={email}
-            required
             onChange={inputChangeHandler}
           />
-          <input
+          <TextField
+            size="small"
+            required
             type="password"
-            className="passwordInput "
-            placeholder="Password"
+            id="outlined-required"
+            label="Password"
+            sx={{mt: 2, mb: 2}}
             name="password"
             value={password}
-            required
             onChange={inputChangeHandler}
           />
           <button>Sign Up</button>

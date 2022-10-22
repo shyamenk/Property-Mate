@@ -41,25 +41,28 @@ const Offers = () => {
   }, [])
   return (
     <div className="category__wrapper">
-      {loading && <Spinner />}
       <header>
         {/* <h1 className="header__title">Offers</h1> */}
-        <ul className="categoryListings">
-          {listings && listings.length > 0 ? (
-            listings.map(listing => (
-              <ListingItems
-                listing={listing.data}
-                id={listing.id}
-                key={listing.id}
-              />
-            ))
-          ) : (
-            <p className="header__title">
-              No offers are Available <br />
-              right Now!
-            </p>
-          )}
-        </ul>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <ul className="categoryListings">
+            {listings && listings.length > 0 ? (
+              listings.map(listing => (
+                <ListingItems
+                  listing={listing.data}
+                  id={listing.id}
+                  key={listing.id}
+                />
+              ))
+            ) : (
+              <p className="header__title">
+                No offers are Available <br />
+                right Now!
+              </p>
+            )}
+          </ul>
+        )}
       </header>
     </div>
   )
