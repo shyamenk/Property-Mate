@@ -13,6 +13,7 @@
   grid-template-rows: repeat(1, 1fr);
   overflow: hidden;
   width: 500px;
+  height: 250px;
   box-shadow: var(--shadow);
   border-radius: var(--border-radius);
   background: white;
@@ -20,6 +21,7 @@
 }
 .listing__container img {
   width: 280px;
+  height: 200px;
   border-radius: 20px;
   padding: 0.8rem;
 }

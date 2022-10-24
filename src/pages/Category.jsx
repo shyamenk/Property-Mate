@@ -15,7 +15,6 @@ import {db} from '../firebase.config.js'
 import Spinner from '../components/Spinner'
 import {toast} from 'react-toastify'
 import ListingItems from '../components/ListingItems.jsx'
-import './Category.css'
 
 const Category = () => {
   //States

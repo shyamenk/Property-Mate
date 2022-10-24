@@ -8,13 +8,13 @@ import TextField from '@mui/material/TextField'
 import {Button, Typography} from '@mui/material'
 import {IOSSwitch} from '../components/Switch'
 import {Stack} from '@mui/system'
-import CircularProgress from '@mui/material/CircularProgress'
 import {
   getStorage,
   ref as storageRef,
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage'
+import {addDoc, collection, serverTimestamp} from 'firebase/firestore'
 import {v4} from 'uuid'
 import {db} from '../firebase.config.js'
 import {toast} from 'react-toastify'
@@ -23,14 +23,14 @@ const CreateListings = () => {
   const [loading, setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
-    type: false,
+    type: 'sell',
     name: '',
     bedrooms: 1,
     bathrooms: 1,
     parking: false,
     furnished: false,
-    address: '',
-    offers: false,
+    location: '',
+    offer: false,
     regularPrice: 0,
     discountedPrice: 0,
     images: {},
@@ -45,8 +45,8 @@ const CreateListings = () => {
     bathrooms,
     parking,
     furnished,
-    address,
-    offers,
+    location,
+    offer,
     regularPrice,
     discountedPrice,
     images,
@@ -74,6 +74,7 @@ const CreateListings = () => {
         snapshot => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          console.log(progress)
         },
         error => {
           setLoading(false)
@@ -105,8 +106,24 @@ const CreateListings = () => {
       setLoading(false)
       toast.error(err.message)
     })
+    const cloneFormData = {
+      ...formData,
+      imgUrls,
+      timestamp: serverTimestamp(),
+    }
 
-    console.log({imgUrls})
+    delete cloneFormData.images
+    !cloneFormData.offer && delete cloneFormData.discountedPrice
+
+    console.log(cloneFormData)
+
+    const docRef = await addDoc(collection(db, 'Listings'), cloneFormData)
+
+    setLoading(false)
+
+    toast.success('Listings Added Successfully')
+
+    navigate(`/category/${cloneFormData.type}/${docRef.id}`)
   }
 
   const onMutate = e => {
@@ -151,7 +168,7 @@ const CreateListings = () => {
     } else {
       setFormData({
         ...formData,
-        type: 'sale',
+        type: 'sell',
       })
     }
   }
@@ -159,7 +176,7 @@ const CreateListings = () => {
   return (
     <>
       <p className="header__title">Create Listings</p>
-      <div className="list-containe">
+      <div className="list-container">
         <div className="list-wrapper">
           <div className="list-contacts">
             <h3>Create Listings</h3>
@@ -181,12 +198,7 @@ const CreateListings = () => {
               <div>
                 <Stack direction="row" spacing={1} alignItems="center">
                   <Typography>Sell</Typography>
-                  <IOSSwitch
-                    onChange={typeHandler}
-                    value={type}
-                    id="type"
-                    required
-                  />
+                  <IOSSwitch onChange={typeHandler} value={type} id="type" />
                   <Typography>Rent</Typography>
                 </Stack>
               </div>
@@ -254,10 +266,10 @@ const CreateListings = () => {
                   <IOSSwitch
                     margin="dense"
                     onChange={switchHandler}
-                    id="offers"
-                    value={offers}
+                    id="offer"
+                    value={offer}
                   />
-                  <Typography>Offers</Typography>
+                  <Typography>offer</Typography>
                 </Stack>
               </div>
               <div>
@@ -277,7 +289,7 @@ const CreateListings = () => {
                     value={regularPrice}
                     onChange={onMutate}
                   />
-                  {offers && (
+                  {offer && (
                     <TextField
                       required
                       id="discountedPrice"
@@ -295,12 +307,12 @@ const CreateListings = () => {
               <div>
                 <TextField
                   required
-                  id="address"
-                  label="Address"
+                  id="location"
+                  label="Location"
                   multiline
                   maxRows={4}
                   size="large"
-                  value={address}
+                  value={location}
                   onChange={onMutate}
                 />
               </div>

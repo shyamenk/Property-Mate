@@ -6,7 +6,6 @@ import {db} from '../firebase.config.js'
 import Spinner from '../components/Spinner'
 import {toast} from 'react-toastify'
 import ListingItems from '../components/ListingItems.jsx'
-import './Category.css'
 
 const Offers = () => {
   //States
@@ -39,6 +38,8 @@ const Offers = () => {
 
     fetchListings()
   }, [])
+
+  console.log(listings)
   return (
     <div className="category__wrapper">
       <header>
