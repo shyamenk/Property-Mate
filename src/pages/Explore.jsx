@@ -3,18 +3,21 @@ import {Link} from 'react-router-dom'
 
 import rentCategoryImage from '../assets/jpg/rentCategoryImage.jpg'
 import sellCategoryImage from '../assets/jpg/sellCategoryImage.jpg'
+import Slider from '../components/Slider'
 import './Explore.css'
 const Explore = () => {
   return (
     <>
       <div className="explore__section">
         <header>
-          <h1 className="header__title">
+          {/* <h1 className="header__title">
             Its a Big World out There,
             <br />
             <span>Go eXPLORE</span>
-          </h1>
+            <p>Recommended</p>
+          </h1> */}
         </header>
+        <Slider />
         <div className="categories">
           <div className="category">
             <img src={rentCategoryImage} alt="rent" />

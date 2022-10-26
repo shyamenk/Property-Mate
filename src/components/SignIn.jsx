@@ -1,8 +1,5 @@
 import {Link, useNavigate} from 'react-router-dom'
 
-// import {AiFillFacebook} from 'react-icons/ai'
-// import {AiFillGoogleCircle} from 'react-icons/ai'
-// import {AiOutlineGithub} from 'react-icons/ai'
 import {ReactComponent as GoogleIcon} from '../assets/svg/google-icon.svg'
 import {ReactComponent as FacebookIcon} from '../assets/svg/facebookIcon.svg'
 
@@ -14,7 +11,7 @@ import {toast} from 'react-toastify'
 import {auth, db} from '../firebase.config.js'
 import {doc, setDoc, getDoc, serverTimestamp} from 'firebase/firestore'
 import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
-import {Input, TextField} from '@mui/material'
+import {TextField} from '@mui/material'
 
 const SignIn = ({
   signInHandler,

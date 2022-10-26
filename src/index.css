@@ -314,6 +314,7 @@ a {
 }
 
 .categoryListings {
+  display: flex;
   padding: 0;
 }
 

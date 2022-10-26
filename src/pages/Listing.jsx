@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Link, useParams} from 'react-router-dom'
+import {MapContainer, Marker, Popup, TileLayer} from 'react-leaflet'
 import {getDoc, doc} from 'firebase/firestore'
 import {db} from '../firebase.config.js'
 import Spinner from '../components/Spinner.jsx'
@@ -35,6 +36,7 @@ const Listing = () => {
   const changeThumbnail = e => {
     setcurrentImage(e.target.src)
   }
+
   return (
     <>
       <div className="grid-wrapper">
@@ -81,6 +83,24 @@ const Listing = () => {
                 onClick={changeThumbnail}
               />
             ))}
+          </div>
+
+          <div className="leafletContainer">
+            <MapContainer
+              style={{height: '100%', width: '100%'}}
+              center={[10.074338, 76.271362]}
+              zoom={13}
+              scrollWheelZoom={false}
+            >
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png"
+              />
+
+              <Marker position={[10.074338, 76.271362]}>
+                <Popup>{listing.location}</Popup>
+              </Marker>
+            </MapContainer>
           </div>
           <div className="grid-items-buttons">
             {user?.uid !== listing.userRef && (
